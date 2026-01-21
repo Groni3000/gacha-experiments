@@ -2,6 +2,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
+SEED = 42  # 42 is the answer
 BASE_RATE = 0.008
 SOFT_PITY_START = 65
 HARD_PITY = 80
@@ -62,6 +63,8 @@ def run_experiment():
     return pulls, first_on_rate_pull, first_5050_lost
 
 def main():
+    # Set random seed to have reproducable results
+    np.random.seed(SEED)
     results = []
     first_on_rate_pulls = []
     first_5050_count = 0
