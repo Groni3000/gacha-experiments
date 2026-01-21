@@ -1,6 +1,7 @@
 import random
-import numpy as np
+
 import matplotlib.pyplot as plt
+import numpy as np
 
 SEED = 42  # 42 is the answer
 BASE_RATE = 0.008
@@ -9,6 +10,7 @@ HARD_PITY = 80
 
 TARGET_ON_RATES = 5
 EXPERIMENTS = 10000
+
 
 def five_star_chance(pity):
     if pity >= 79:
@@ -72,6 +74,7 @@ def run_experiment():
 
     return pulls, first_on_rate_pull, first_5050_lost
 
+
 def main():
     # Set random seed to have reproducable results
     np.random.seed(SEED)
@@ -91,11 +94,15 @@ def main():
     print(f"Minimum pulls needed: {min(results)}")
     print(f"Maximum pulls needed: {max(results)}")
     print(f"Average pulls needed: {np.mean(results):.2f}")
-    print(f"5th percentile pulls needed: {np.percentile(results,5):.0f}")
-    print(f"95th percentile pulls needed: {np.percentile(results,95):.0f}")
+    print(f"5th percentile pulls needed: {np.percentile(results, 5):.0f}")
+    print(f"95th percentile pulls needed: {np.percentile(results, 95):.0f}")
     print(f"Average pulls to first rate-up: {np.mean(first_on_rate_pulls):.2f}")
-    print(f"5th percentile for first rate-up: {np.percentile(first_on_rate_pulls,5):.0f}")
-    print(f"95th percentile for first rate-up: {np.percentile(first_on_rate_pulls,95):.0f}")
+    print(
+        f"5th percentile for first rate-up: {np.percentile(first_on_rate_pulls, 5):.0f}"
+    )
+    print(
+        f"95th percentile for first rate-up: {np.percentile(first_on_rate_pulls, 95):.0f}"
+    )
     print(f"Number of experiments that lost the first 50/50: {first_5050_count}")
 
     # --------------------
@@ -103,7 +110,7 @@ def main():
     # --------------------
     counts = np.bincount(results)
     x = np.arange(len(counts))
-    plt.figure(figsize=(10,6))
+    plt.figure(figsize=(10, 6))
     plt.plot(x, counts, linewidth=2)
     plt.xlabel("Pulls Required")
     plt.ylabel("Frequency")
@@ -116,13 +123,14 @@ def main():
     # --------------------
     counts_first = np.bincount(first_on_rate_pulls)
     x_first = np.arange(len(counts_first))
-    plt.figure(figsize=(10,6))
+    plt.figure(figsize=(10, 6))
     plt.plot(x_first, counts_first, linewidth=2)
     plt.xlabel("Pulls to First Rate-Up")
     plt.ylabel("Frequency")
     plt.title("(WUWA) Total Pulls Needed for First Character On-Rate")
     plt.grid(True)
     plt.show()
+
 
 if __name__ == "__main__":
     main()
