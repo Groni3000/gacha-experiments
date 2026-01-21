@@ -11,11 +11,21 @@ TARGET_ON_RATES = 5
 EXPERIMENTS = 10000
 
 def five_star_chance(pity):
-    if pity < SOFT_PITY_START:
-        return BASE_RATE
-    ramp_steps = HARD_PITY - SOFT_PITY_START
-    increase_per_pull = (1.0 - BASE_RATE) / ramp_steps
-    return min(1.0, BASE_RATE + (pity - SOFT_PITY_START + 1) * increase_per_pull)
+    if pity >= 79:
+        return 1.0
+    elif pity > 75:
+        additional_rate = 0.6 + BASE_RATE + 0.1 * (pity - 75)
+    elif pity > 70:
+        additional_rate = 0.2 + BASE_RATE + 0.08 * (pity - 70)
+    elif pity > 65:
+        additional_rate = 0.04 * (pity - 65)
+    else:
+        additional_rate = 0
+
+    rate = BASE_RATE + additional_rate
+
+    return rate
+
 
 def run_experiment():
     pulls = 0
