@@ -16,9 +16,9 @@ def five_star_chance(pity):
     if pity >= 79:
         return 1.0
     elif pity > 75:
-        additional_rate = 0.6 + BASE_RATE + 0.1 * (pity - 75)
+        additional_rate = 0.6 + 0.1 * (pity - 75)
     elif pity > 70:
-        additional_rate = 0.2 + BASE_RATE + 0.08 * (pity - 70)
+        additional_rate = 0.2 + 0.08 * (pity - 70)
     elif pity > 65:
         additional_rate = 0.04 * (pity - 65)
     else:
